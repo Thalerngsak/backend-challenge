@@ -1,0 +1,15 @@
+syntax = "proto3";
+package services;
+option go_package="./services";
+
+service MeatCounter {
+  rpc GetMeatSummary(MeatRequest) returns (MeatSummary) {}
+}
+
+message MeatRequest {
+  string input = 1;
+}
+
+message MeatSummary {
+  map<string, int32> beef = 1;
+}
