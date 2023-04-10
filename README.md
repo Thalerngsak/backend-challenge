@@ -14,6 +14,8 @@
 input = `[[59], [73, 41], [52, 40, 53], [26, 53, 6, 34]]`
 output = `237`
 
+Solution : findthemostvaluablepath
+
 ## 2. จับฉันให้ได้สิ ซ้าย-ขวา-เท่ากับ
 
 ให้ถอดรหัสตัวอักษรตามตัวอย่างด้านล่าง
@@ -43,6 +45,8 @@ output = `237`
 
 input = `LLRR=`
 output = `210122`
+
+Solution : decodetheletters
 
 ## 3. พาย ไฟ ได - Pie Fire Dire  
 
@@ -78,3 +82,4 @@ output = `210122`
     }
 }
 ```
+Solution : piefiredire
