@@ -7,7 +7,9 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
+	"io/ioutil"
 	"log"
+	"net/http"
 )
 
 func main() {
@@ -38,8 +40,20 @@ func main() {
 
 	meatCounterClient := services.NewMeatCounterClient(cc)
 	calculatorService := services.NewMeatCounterService(meatCounterClient)
-	input := "Fatback t-bone t-bone, pastrami .. t-bone. pork, meatloaf jowl enim. Bresaola t-bone."
-	err = calculatorService.GetMeatSummary(input)
+
+	url := "https://baconipsum.com/api/?type=meat-and-filler&paras=99&format=text"
+	resp, err := http.Get(url)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	err = calculatorService.GetMeatSummary(string(body))
 
 	if err != nil {
 		if grpcErr, ok := status.FromError(err); ok {
