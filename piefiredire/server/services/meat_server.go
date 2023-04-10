@@ -19,7 +19,14 @@ func (s meatCounterServer) GetMeatSummary(ctx context.Context, in *MeatRequest) 
 	meatCounter := make(map[string]int32)
 
 	for _, meat := range meats {
-		if meat != "," && meat != "." && meat != "" {
+		if strings.ContainsAny(meat, ",") {
+			meat = strings.ReplaceAll(meat, ",", "")
+		}
+		if strings.ContainsAny(meat, ".") {
+			meat = strings.ReplaceAll(meat, ".", "")
+		}
+		if meat != "" {
+			meat = strings.ToLower(meat)
 			meatCounter[meat]++
 		}
 	}
